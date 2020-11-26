@@ -1,15 +1,34 @@
 import { getConnection } from "typeorm";
-import Book from "../../../entity/Book";
+import User from "../../../entity/User";
 
 export default {
-  createBooks: async () => {
-    const user = new Book();
+  createUser: async (
+    _: any,
+    {
+      firstName,
+      lastName,
+      email,
+      iconUrl,
+      address,
+    }: {
+      firstName: string;
+      lastName: string;
+      email: string;
+      iconUrl: string;
+      address: string;
+    }
+  ) => {
+    const user = new User();
+    console.log(_);
+    console.log(firstName, lastName, email, iconUrl, address);
 
-    user.title = "Marnie movie";
-    user.author = "Timber Saw";
+    //TODO add validation
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.email = email;
+    user.iconUrl = iconUrl;
+    user.address = address;
 
-    console.log("user", user);
-
-    await getConnection().manager.save(user);
+    return await getConnection().manager.save(user);
   },
 };

@@ -7,15 +7,26 @@ export default gql`
   }
 
   type Query {
-    books: [Book]
+    users: [User]
   }
 
   type Mutation {
-    createBooks: [Book]
+    createUser(input: CreateUserInput!): User
   }
 
-  type Book {
-    title: String
-    author: String
+  type User {
+    firstName: String
+    lastName: String
+    email: String
+    address: String
+    iconUrl: String
+  }
+
+  input CreateUserInput {
+    firstName: String!
+    lastName: String!
+    email: String!
+    iconUrl: String
+    address: String!
   }
 `;
