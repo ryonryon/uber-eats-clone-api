@@ -1,5 +1,5 @@
 import Fastify from "fastify";
-import {createConnection} from "typeorm";
+import { createConnection } from "typeorm";
 import apollo from "./graphql";
 
 import "reflect-metadata";
@@ -13,10 +13,10 @@ fastify.register(apollo.createHandler());
   try {
     await fastify.listen({ port: 3000 });
 
-    console.log(`🚀 Server is ready at 3000`);
+    console.log(`🚀 Server is ready at http://localhost:3000/graphql`);
   } catch (err) {
     fastify.log.error(err);
 
     process.exit(1);
   }
-})()
+})();

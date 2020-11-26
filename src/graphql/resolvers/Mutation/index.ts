@@ -8,8 +8,8 @@ export default {
     user.title = "Marnie movie";
     user.author = "Timber Saw";
 
-    console.log("user", user)
+    console.log("user", user);
 
     await getConnection().manager.save(user);
-  }
-}
+  },
+};
