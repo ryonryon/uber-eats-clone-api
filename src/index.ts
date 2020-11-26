@@ -1,21 +1,22 @@
-import { ApolloServer } from 'apollo-server-micro';
-import { makeExecutableSchema } from 'graphql-tools';
-import { send } from 'micro';
-import { get, post, router } from 'microrouter';
+import Fastify from "fastify";
+import {createConnection} from "typeorm";
+import apollo from "./graphql";
 
-import resolvers from "./resolvers"
-import typeDefs from "./typeDefs";
+import "reflect-metadata";
 
-const apolloServer = new ApolloServer({ schema: makeExecutableSchema({
-  typeDefs,
-  resolvers,
-})
-});
+const fastify = Fastify();
+fastify.register(apollo.createHandler());
 
-const graphqlHandler = apolloServer.createHandler({ path: '/graphql' });
+(async () => {
+  await createConnection();
 
-module.exports = router(
-  post('/graphql', graphqlHandler),
-  get('/graphql', graphqlHandler),
-  (_, res) => send(res, 404, 'Not Found'),
-);
+  try {
+    await fastify.listen({ port: 3000 });
+
+    console.log(`🚀 Server is ready at 3000`);
+  } catch (err) {
+    fastify.log.error(err);
+
+    process.exit(1);
+  }
+})()

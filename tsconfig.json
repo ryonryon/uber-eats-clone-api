@@ -1,13 +1,20 @@
 {
-    "compilerOptions": {
-      "esModuleInterop": true,
-      "module": "commonjs",
-      "outDir": "./build",
-      "resolveJsonModule": true,
-      "strict": true,
-      "target": "esnext"
-    },
-    "include": ["./src/**/*"],
-    "exclude": ["node_modules"]
-  }
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "./build",
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "es2018",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules"]
+}
   
