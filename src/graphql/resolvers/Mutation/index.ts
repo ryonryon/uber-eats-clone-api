@@ -19,8 +19,6 @@ export default {
     }
   ) => {
     const user = new User();
-    console.log(_);
-    console.log(firstName, lastName, email, iconUrl, address);
 
     //TODO add validation
     user.firstName = firstName;

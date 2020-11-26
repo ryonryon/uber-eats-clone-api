@@ -8,25 +8,25 @@ export default gql`
 
   type Query {
     users: [User]
+    user(id: ID!): User
   }
 
   type Mutation {
-    createUser(input: CreateUserInput!): User
+    createUser(
+      firstName: String!
+      lastName: String!
+      email: String!
+      iconUrl: String
+      address: String!
+    ): User
   }
 
   type User {
-    firstName: String
-    lastName: String
-    email: String
-    address: String
-    iconUrl: String
-  }
-
-  input CreateUserInput {
+    id: ID!
     firstName: String!
     lastName: String!
     email: String!
-    iconUrl: String
     address: String!
+    iconUrl: String
   }
 `;
