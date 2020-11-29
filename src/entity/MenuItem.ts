@@ -24,7 +24,9 @@ export default class MenuItem {
   @Column({ type: "text", nullable: true })
   mediaUrl!: string | null;
 
-  @ManyToOne(() => Restaurant, (restaurant) => restaurant.menu)
+  @ManyToOne(() => Restaurant, (restaurant) => restaurant.menu, {
+    onDelete: "CASCADE",
+  })
   @JoinColumn()
   restaurant!: Restaurant | RestaurantId;
 }
