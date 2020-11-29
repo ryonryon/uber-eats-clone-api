@@ -1,9 +1,11 @@
 import createMenuItem from "./createMenuItem";
 import createRestaurant from "./createRestaurant";
 import createUser from "./createUser";
+import removeUser from "./removeUser";
 
 export default {
-  createUser,
-  createRestaurant,
   createMenuItem,
+  createRestaurant,
+  createUser,
+  removeUser,
 };

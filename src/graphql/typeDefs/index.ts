@@ -23,6 +23,7 @@ export default gql`
       iconUrl: String
       address: String!
     ): User
+    removeUser(userId: ID!): DeleteItemResponse!
     createRestaurant(
       name: String!
       description: String
@@ -31,6 +32,7 @@ export default gql`
       phone: Float
       rate: Int
     ): Restaurant
+    removeRestaurant(restaurantId: ID!): DeleteItemResponse!
     createMenuItem(
       name: String!
       description: String
@@ -38,6 +40,7 @@ export default gql`
       mediaUrl: String
       restaurantId: ID!
     ): MenuItem
+    removeMenuItem(menuItemId: ID!): DeleteItemResponse!
   }
 
   type User {
@@ -67,6 +70,11 @@ export default gql`
     price: Float!
     mediaUrl: String
     restaurant: Restaurant!
+  }
+
+  type DeleteItemResponse {
+    affectedCount: Int!
+    message: String!
   }
 
   enum RestaurantType {
