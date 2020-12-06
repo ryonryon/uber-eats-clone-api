@@ -1,5 +1,5 @@
 import { getConnection } from "typeorm";
-import User from "../../../entity/User";
+import User from "../../../entities/User";
 
 export default async () => {
   return await getConnection().manager.find(User);

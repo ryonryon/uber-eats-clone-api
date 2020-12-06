@@ -1,5 +1,5 @@
 import { getConnection } from "typeorm";
-import MenuItem from "../../../entity/MenuItem";
+import MenuItem from "../../../entities/MenuItem";
 import { decodeEntity } from "../../../utils/atob";
 
 export default async (

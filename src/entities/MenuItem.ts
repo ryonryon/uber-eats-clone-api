@@ -32,5 +32,5 @@ export default class MenuItem {
 }
 
 export type MenuItemId = number & {
-  _MenuItemId: never;
+  _MenuItemIdBrand: never;
 };

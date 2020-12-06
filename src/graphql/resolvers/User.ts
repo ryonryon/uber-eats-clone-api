@@ -1,5 +1,5 @@
 import { encodeEntity } from "../../utils/btoa";
-import User from "../../entity/User";
+import User from "../../entities/User";
 
 export default {
   id: async (source: User, _: any) => {

@@ -1,6 +1,6 @@
 import { getConnection } from "typeorm";
-import Restaurant from "../../../entity/Restaurant";
-import RestaurantType from "../../../entity/RestaurantType";
+import Restaurant from "../../../entities/Restaurant";
+import RestaurantType from "../../../entities/RestaurantType";
 
 export default async (
   _: any,

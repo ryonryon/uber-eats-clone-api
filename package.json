@@ -17,6 +17,7 @@
     "dataloader": "^2.0.0",
     "dotenv": "^5.0.1",
     "fastify": "^2.13.1",
+    "firebase-admin": "^9.4.1",
     "graphql": "^15.4.0",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",

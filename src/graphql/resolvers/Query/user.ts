@@ -1,5 +1,5 @@
 import { getConnection } from "typeorm";
-import User from "../../../entity/User";
+import User from "../../../entities/User";
 import { decodeEntity } from "../../../utils/atob";
 
 export default async (_: any, { id }: { id: string }) => {

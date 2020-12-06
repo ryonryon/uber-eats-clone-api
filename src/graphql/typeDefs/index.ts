@@ -7,6 +7,7 @@ export default gql`
   }
 
   type Query {
+    viewer: User
     users: [User]
     user(id: ID!): User
     restaurants: [Restaurant]
@@ -16,13 +17,6 @@ export default gql`
   }
 
   type Mutation {
-    createUser(
-      firstName: String!
-      lastName: String!
-      email: String!
-      iconUrl: String
-      address: String!
-    ): User
     removeUser(userId: ID!): DeleteItemResponse!
     createRestaurant(
       name: String!
@@ -45,11 +39,11 @@ export default gql`
 
   type User {
     id: ID!
-    firstName: String!
-    lastName: String!
+    name: String!
     email: String!
-    address: String!
-    iconUrl: String
+    authenticationId: String!
+    profileImageURL: String
+    address: String
   }
 
   type Restaurant {

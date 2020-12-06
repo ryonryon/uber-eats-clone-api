@@ -1,8 +1,8 @@
 import DataLoader from "dataloader";
 import { FastifyRequest } from "fastify";
 import { getConnection } from "typeorm";
-import { RestaurantId } from "../../entity/Restaurant";
-import MenuItem from "../../entity/MenuItem";
+import { RestaurantId } from "../../entities/Restaurant";
+import MenuItem from "../../entities/MenuItem";
 
 export interface DataLoaders {
   getMenuItemsByRestaurantIds: DataLoader<RestaurantId, MenuItem[]>;

@@ -1,5 +1,5 @@
 import { getConnection } from "typeorm";
-import Restaurant from "../../../entity/Restaurant";
+import Restaurant from "../../../entities/Restaurant";
 import { decodeEntity } from "../../../utils/atob";
 
 export default async (_: any, { id }: { id: string }) => {

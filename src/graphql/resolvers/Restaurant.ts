@@ -1,5 +1,5 @@
 import { encodeEntity } from "../../utils/btoa";
-import Restaurant from "../../entity/Restaurant";
+import Restaurant from "../../entities/Restaurant";
 import { Context } from "../context";
 
 export default {

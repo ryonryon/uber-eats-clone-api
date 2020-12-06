@@ -37,5 +37,5 @@ export default class Restaurant {
 }
 
 export type RestaurantId = number & {
-  _RestaurantId: never;
+  _RestaurantIdBrand: never;
 };

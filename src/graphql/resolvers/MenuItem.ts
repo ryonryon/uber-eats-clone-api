@@ -1,7 +1,7 @@
 import { getConnection } from "typeorm";
 import { encodeEntity } from "../../utils/btoa";
-import MenuItem from "../../entity/MenuItem";
-import Restaurant, { RestaurantId } from "../../entity/Restaurant";
+import MenuItem from "../../entities/MenuItem";
+import Restaurant, { RestaurantId } from "../../entities/Restaurant";
 
 export default {
   id: async (source: MenuItem, _: any) => {
