@@ -5,6 +5,7 @@ import OrderItem from "../../../entities/OrderItem";
 import OrderStatus from "../../../entities/OrderStatus";
 import Restaurant, { RestaurantId } from "../../../entities/Restaurant";
 import { decodeEntity } from "../../../utils/atob";
+import { Context } from "../../context";
 
 interface InputType {
   restaurantId: string;
@@ -31,7 +32,8 @@ export default async (
     tax,
     deliveryFee,
     tip,
-  }: InputType
+  }: InputType,
+  { user }: Context
 ) => {
   const connection = getConnection();
   const _restaurantId = decodeEntity(restaurantId) as RestaurantId;
@@ -41,6 +43,7 @@ export default async (
     .findOne({ where: { id: _restaurantId } });
 
   if (!restaurant) throw new Error("the restaurant isn't exist");
+  if (!user) throw new Error("the user isn't exist");
 
   return await connection.transaction(async (transactionalEntityManager) => {
     const orderItems: OrderItem[] = [];
@@ -78,6 +81,7 @@ export default async (
     orderInput.deliveryFee = deliveryFee;
     orderInput.tip = tip;
     orderInput.items = orderItems;
+    orderInput.user = user.id;
 
     const order = await transactionalEntityManager.save(orderInput);
 

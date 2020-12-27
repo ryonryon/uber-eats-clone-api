@@ -9,7 +9,6 @@ export default {
     return encodeEntity(source.id, "user");
   },
   pastOrders: async (source: User, _: any) => {
-    console.log("source", source);
     return await getConnection()
       .manager.getRepository(Order)
       .find({ where: { user: source.id } });
