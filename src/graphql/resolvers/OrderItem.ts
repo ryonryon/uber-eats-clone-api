@@ -5,4 +5,7 @@ export default {
   id: async (source: OrderItem, _: any) => {
     return encodeEntity(source.id, "order-item");
   },
+  itemCount: async (source: OrderItem, _: any) => {
+    return source.count;
+  },
 };
