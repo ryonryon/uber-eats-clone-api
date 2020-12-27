@@ -63,9 +63,7 @@ export default gql`
   }
 
   input MenuItemInput {
-    name: String!
-    description: String!
-    price: Float!
+    id: ID!
     itemCount: Int!
   }
 

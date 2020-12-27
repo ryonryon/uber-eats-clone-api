@@ -3,6 +3,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import OrderStatus from "./OrderStatus";
@@ -21,9 +22,9 @@ export default class Order {
   @Column()
   restaurant!: RestaurantId;
 
-  @ManyToOne(() => OrderItem, (orderItem) => orderItem.order)
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
   @JoinColumn()
-  items?: OrderItem[];
+  items!: OrderItem[];
 
   @Column()
   status!: OrderStatus;

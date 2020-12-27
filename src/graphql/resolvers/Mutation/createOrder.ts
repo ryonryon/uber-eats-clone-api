@@ -1,4 +1,5 @@
 import { getConnection } from "typeorm";
+import MenuItem from "../../../entities/MenuItem";
 import Order from "../../../entities/Order";
 import OrderItem from "../../../entities/OrderItem";
 import OrderStatus from "../../../entities/OrderStatus";
@@ -8,9 +9,7 @@ import { decodeEntity } from "../../../utils/atob";
 interface InputType {
   restaurantId: string;
   items: {
-    name: string;
-    description: string;
-    price: number;
+    id: string;
     itemCount: number;
   }[];
   status: OrderStatus;
@@ -43,7 +42,27 @@ export default async (
 
   if (!restaurant) throw new Error("the restaurant isn't exist");
 
-  connection.transaction(async (transactionalEntityManager) => {
+  return await connection.transaction(async (transactionalEntityManager) => {
+    const orderItems: OrderItem[] = [];
+    for (let i = 0; i < items.length; i++) {
+      const order = await getConnection()
+        .manager.getRepository(MenuItem)
+        .findOne(decodeEntity(items[i].id));
+
+      if (order === undefined)
+        throw new Error(`the order id:${items[i].id} is not exist`);
+
+      const orderItem = new OrderItem();
+      orderItem.name = order.name;
+      orderItem.description = order.description;
+      orderItem.price = order.price;
+      orderItem.count = items[i].itemCount;
+
+      await transactionalEntityManager.save(orderItem);
+
+      orderItems.push(orderItem);
+    }
+
     const orderInput = new Order();
     orderInput.restaurant = _restaurantId;
     orderInput.status = status;
@@ -51,22 +70,16 @@ export default async (
       status === OrderStatus.COMPLETED ? new Date().toISOString() : null;
     orderInput.note = note;
     orderInput.address = address;
-    orderInput.subtotal = items.reduce((sum, { price }) => sum + price, 0);
+    orderInput.subtotal = orderItems.reduce(
+      (sum, { price, count }) => sum + price * count,
+      0
+    );
     orderInput.tax = tax;
     orderInput.deliveryFee = deliveryFee;
     orderInput.tip = tip;
+    orderInput.items = orderItems;
 
     const order = await transactionalEntityManager.save(orderInput);
-
-    items.forEach(async ({ name, description, price }) => {
-      const orderItem = new OrderItem();
-      orderItem.order = order.id;
-      orderItem.name = name;
-      orderItem.description = description;
-      orderItem.price = price;
-
-      await transactionalEntityManager.save(orderItem);
-    });
 
     return order;
   });

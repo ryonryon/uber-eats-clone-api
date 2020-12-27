@@ -21,6 +21,9 @@ export default class OrderItem {
   @Column({ type: "float" })
   price!: number;
 
+  @Column({ type: "int" })
+  count!: number;
+
   @ManyToOne(() => Order, (order) => order.items, {
     onDelete: "CASCADE",
   })
