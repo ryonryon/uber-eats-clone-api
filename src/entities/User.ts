@@ -3,7 +3,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  OneToMany,
 } from "typeorm";
+import Order from "./Order";
 
 @Entity()
 export default class User {
@@ -27,6 +29,9 @@ export default class User {
 
   @CreateDateColumn()
   readonly createdAt!: Date;
+
+  @OneToMany(() => Order, (order) => order.user)
+  pastOrders!: Order[];
 }
 
 export type UserId = number & {

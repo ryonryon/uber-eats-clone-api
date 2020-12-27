@@ -4,6 +4,7 @@ import DeleteItemResponse from "./DeleteItemResponse";
 import MenuItem from "./MenuItem";
 import Restaurant from "./Restaurant";
 import User from "./User";
+import Viewer from "./Viewer";
 
 const resolvers = {
   Mutation,
@@ -12,6 +13,7 @@ const resolvers = {
   MenuItem,
   Restaurant,
   User,
+  Viewer,
 };
 
 export default resolvers;
