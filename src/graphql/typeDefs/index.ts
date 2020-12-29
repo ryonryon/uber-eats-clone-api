@@ -45,7 +45,7 @@ export default gql`
       rate: Int
     ): Restaurant
     deleteOrder(id: ID!): Boolean
-    deleverOrder(id: ID!): Order
+    deliverOrder(id: ID!): Order
     removeMenuItem(menuItemId: ID!): DeleteItemResponse!
     removeRestaurant(restaurantId: ID!): DeleteItemResponse!
     removeUser(userId: ID!): DeleteItemResponse!
