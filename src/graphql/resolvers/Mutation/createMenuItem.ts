@@ -18,7 +18,7 @@ export default async (
   const connection = getConnection();
   const _restaurantId = decodeEntity(restaurantId) as RestaurantId;
 
-  const restaurant = connection.manager
+  const restaurant = await connection.manager
     .getRepository(Restaurant)
     .findOne({ where: { id: _restaurantId } });
 

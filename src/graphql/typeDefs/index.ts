@@ -18,6 +18,7 @@ export default gql`
   }
 
   type Mutation {
+    completeOrder(id: ID!): Order
     createOrder(
       restaurantId: ID!
       items: [MenuItemInput!]!
@@ -43,6 +44,8 @@ export default gql`
       phone: Float
       rate: Int
     ): Restaurant
+    deleteOrder(id: ID!): Boolean
+    deleverOrder(id: ID!): Order
     removeMenuItem(menuItemId: ID!): DeleteItemResponse!
     removeRestaurant(restaurantId: ID!): DeleteItemResponse!
     removeUser(userId: ID!): DeleteItemResponse!

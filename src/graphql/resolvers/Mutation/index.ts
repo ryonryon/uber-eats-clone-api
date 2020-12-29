@@ -1,3 +1,4 @@
+import completeOrder from "./completeOrder";
 import createMenuItem from "./createMenuItem";
 import createOrder from "./createOrder";
 import createRestaurant from "./createRestaurant";
@@ -6,6 +7,7 @@ import removeRestaurant from "./removeRestaurant";
 import removeUser from "./removeUser";
 
 export default {
+  completeOrder,
   createMenuItem,
   createOrder,
   createRestaurant,
