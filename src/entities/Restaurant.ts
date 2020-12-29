@@ -19,7 +19,7 @@ export default class Restaurant {
   @Column({ type: "text", nullable: true })
   description!: string | null;
 
-  @Column()
+  @Column({ type: "character varying" })
   type!: RestaurantType;
 
   @Column()

@@ -65,6 +65,11 @@ export default gql`
     ALCOHOL
   }
 
+  enum UserType {
+    CUSTOMER
+    DRIVER
+  }
+
   input MenuItemInput {
     id: ID!
     itemCount: Int!
@@ -123,6 +128,8 @@ export default gql`
     email: String!
     authenticationId: String!
     profileImageURL: String
+    registered: Boolean!
+    type: UserType
     address: String
   }
 
@@ -133,6 +140,8 @@ export default gql`
     profileImageURL: String
     address: String
     pastOrders: [Order]
+    registered: Boolean!
+    type: UserType
     restaurants: [Restaurant]
   }
 `;

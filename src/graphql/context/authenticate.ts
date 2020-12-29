@@ -40,6 +40,7 @@ export default async (request: any, context: any): Promise<any> => {
         name: decodedToken.name ?? "",
         profileImageURL: decodedToken.picture ?? "",
         authenticationId: decodedToken.uid,
+        registered: false,
       });
 
       const createdUser = await manager

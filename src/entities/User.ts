@@ -6,6 +6,7 @@ import {
   OneToMany,
 } from "typeorm";
 import Order from "./Order";
+import UserType from "./UserType";
 
 @Entity()
 export default class User {
@@ -23,6 +24,12 @@ export default class User {
 
   @Column({ type: "text" })
   profileImageURL!: string;
+
+  @Column({ type: "boolean" })
+  registered!: boolean;
+
+  @Column({ type: "character varying", nullable: true })
+  type?: UserType | null;
 
   @Column({ type: "text", nullable: true })
   address!: string | null;
