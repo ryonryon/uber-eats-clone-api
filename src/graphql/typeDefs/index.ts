@@ -13,6 +13,7 @@ export default gql`
     restaurant(id: ID!): Restaurant
     restaurants: [Restaurant]
     user(id: ID!): User
+    drivers: [User]!
     users: [User]
     viewer: Viewer
   }
@@ -46,6 +47,7 @@ export default gql`
     ): Restaurant
     deleteOrder(id: ID!): Boolean
     deliverOrder(id: ID!): Order
+    registerUser(id: ID!, type: UserType!, address: String): User
     removeMenuItem(menuItemId: ID!): DeleteItemResponse!
     removeRestaurant(restaurantId: ID!): DeleteItemResponse!
     removeUser(userId: ID!): DeleteItemResponse!
