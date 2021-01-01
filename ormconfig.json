@@ -6,7 +6,7 @@
   "password": "ryon0304",
   "database": "uber_eats_clone",
   "synchronize": true,
-  "logging": true,
+  "logging": false,
   "entities": ["src/entities/**/*.ts"],
   "migrations": ["src/migration/**/*.ts"],
   "subscribers": ["src/subscriber/**/*.ts"],

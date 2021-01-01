@@ -15,7 +15,7 @@ export default gql`
     user(id: ID!): User
     drivers: [User]!
     users: [User]
-    viewer: Viewer
+    viewer: User
   }
 
   type Mutation {
@@ -47,7 +47,12 @@ export default gql`
     ): Restaurant
     deleteOrder(id: ID!): Boolean
     deliverOrder(id: ID!): Order
-    registerUser(id: ID!, type: UserType!, address: String): User
+    registerCustomer(
+      id: ID!
+      address: String!
+      firstName: String!
+      lastName: String!
+    ): User
     removeMenuItem(menuItemId: ID!): DeleteItemResponse!
     removeRestaurant(restaurantId: ID!): DeleteItemResponse!
     removeUser(userId: ID!): DeleteItemResponse!
@@ -67,14 +72,32 @@ export default gql`
     ALCOHOL
   }
 
-  enum UserType {
-    CUSTOMER
-    DRIVER
-  }
-
   input MenuItemInput {
     id: ID!
     itemCount: Int!
+  }
+
+  type Customer {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    address: String!
+    pastOrders: [Order]
+    restaurants: [Restaurant]
+  }
+
+  type DeleteItemResponse {
+    affectedCount: Int!
+    message: String!
+  }
+
+  type MenuItem {
+    id: ID!
+    name: String!
+    description: String
+    price: Float!
+    mediaUrl: String
+    restaurant: Restaurant!
   }
 
   type Order {
@@ -99,20 +122,6 @@ export default gql`
     itemCount: Int!
   }
 
-  type DeleteItemResponse {
-    affectedCount: Int!
-    message: String!
-  }
-
-  type MenuItem {
-    id: ID!
-    name: String!
-    description: String
-    price: Float!
-    mediaUrl: String
-    restaurant: Restaurant!
-  }
-
   type Restaurant {
     id: ID!
     name: String!
@@ -131,19 +140,6 @@ export default gql`
     authenticationId: String!
     profileImageURL: String
     registered: Boolean!
-    type: UserType
-    address: String
-  }
-
-  type Viewer {
-    id: ID!
-    name: String!
-    email: String!
-    profileImageURL: String
-    address: String
-    pastOrders: [Order]
-    registered: Boolean!
-    type: UserType
-    restaurants: [Restaurant]
+    customer: Customer
   }
 `;

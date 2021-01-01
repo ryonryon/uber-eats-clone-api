@@ -4,7 +4,7 @@ import createOrder from "./createOrder";
 import createRestaurant from "./createRestaurant";
 import deleteOrder from "./deleteOrder";
 import deliverOrder from "./deliverOrder";
-import registerUser from "./registerUser";
+import registerCustomer from "./registerCustomer";
 import removeMenuItem from "./removeMenuItem";
 import removeRestaurant from "./removeRestaurant";
 import removeUser from "./removeUser";
@@ -16,7 +16,7 @@ export default {
   createRestaurant,
   deleteOrder,
   deliverOrder,
-  registerUser,
+  registerCustomer,
   removeMenuItem,
   removeRestaurant,
   removeUser,

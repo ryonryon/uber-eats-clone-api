@@ -9,15 +9,15 @@ import {
 import OrderStatus from "./OrderStatus";
 import OrderItem from "./OrderItem";
 import { RestaurantId } from "./Restaurant";
-import User, { UserId } from "./User";
+import Customer, { CustomerId } from "./Customer";
 
 @Entity()
 export default class Order {
   @PrimaryGeneratedColumn()
   id!: OrderId;
 
-  @ManyToOne(() => User, (user) => user.pastOrders)
-  user!: User | UserId;
+  @ManyToOne(() => Customer, (customer) => customer.pastOrders)
+  customer!: Customer | CustomerId;
 
   @Column()
   restaurant!: RestaurantId;

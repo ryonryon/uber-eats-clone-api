@@ -1,4 +1,5 @@
 import { getConnection } from "typeorm";
+import Customer from "../../../entities/Customer";
 import MenuItem from "../../../entities/MenuItem";
 import Order from "../../../entities/Order";
 import OrderItem from "../../../entities/OrderItem";
@@ -45,6 +46,12 @@ export default async (
   if (!restaurant) throw new Error("the restaurant isn't exist");
   if (!user) throw new Error("the user isn't exist");
 
+  const customer = await connection.manager
+    .getRepository(Customer)
+    .findOne(user.id);
+
+  if (!customer) throw new Error("the user isn't customer");
+
   return await connection.transaction(async (transactionalEntityManager) => {
     const orderItems: OrderItem[] = [];
     for (let i = 0; i < items.length; i++) {
@@ -66,25 +73,23 @@ export default async (
       orderItems.push(orderItem);
     }
 
-    const orderInput = new Order();
-    orderInput.restaurant = _restaurantId;
-    orderInput.status = status;
-    orderInput.orderedAt =
+    const order = new Order();
+    order.restaurant = _restaurantId;
+    order.status = status;
+    order.orderedAt =
       status === OrderStatus.COMPLETED ? new Date().toISOString() : null;
-    orderInput.note = note;
-    orderInput.address = address;
-    orderInput.subtotal = orderItems.reduce(
+    order.note = note;
+    order.address = address;
+    order.subtotal = orderItems.reduce(
       (sum, { price, count }) => sum + price * count,
       0
     );
-    orderInput.tax = tax;
-    orderInput.deliveryFee = deliveryFee;
-    orderInput.tip = tip;
-    orderInput.items = orderItems;
-    orderInput.user = user.id;
+    order.tax = tax;
+    order.deliveryFee = deliveryFee;
+    order.tip = tip;
+    order.items = orderItems;
+    order.customer = customer.id;
 
-    const order = await transactionalEntityManager.save(orderInput);
-
-    return order;
+    return await transactionalEntityManager.save(order);
   });
 };
