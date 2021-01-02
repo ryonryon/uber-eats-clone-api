@@ -53,9 +53,16 @@ export default gql`
       firstName: String!
       lastName: String!
     ): User
+    registerDriver(id: ID!, firstName: String!, lastName: String!): User
     removeMenuItem(menuItemId: ID!): DeleteItemResponse!
     removeRestaurant(restaurantId: ID!): DeleteItemResponse!
     removeUser(userId: ID!): DeleteItemResponse!
+  }
+
+  enum DriverStatus {
+    ACTIVE
+    INACTIVE
+    DELIVERING
   }
 
   enum OrderStatus {
@@ -84,6 +91,15 @@ export default gql`
     address: String!
     pastOrders: [Order]
     restaurants: [Restaurant]
+  }
+
+  type Driver {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    status: DriverStatus!
+    currentLocation: String
+    deliveredOrders: [Order]
   }
 
   type DeleteItemResponse {
@@ -141,5 +157,6 @@ export default gql`
     profileImageURL: String
     registered: Boolean!
     customer: Customer
+    driver: Driver
   }
 `;

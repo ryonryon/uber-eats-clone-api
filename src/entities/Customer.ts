@@ -4,6 +4,7 @@ import {
   Column,
   OneToMany,
   OneToOne,
+  JoinColumn,
 } from "typeorm";
 import Order from "./Order";
 import User, { UserId } from "./User";
@@ -14,6 +15,7 @@ export default class Customer {
   id!: CustomerId;
 
   @OneToOne(() => User)
+  @JoinColumn()
   user!: User | UserId;
 
   @Column({ type: "text" })

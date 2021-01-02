@@ -1,5 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
-import User from "./User";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinColumn,
+  OneToOne,
+} from "typeorm";
+import User, { UserId } from "./User";
 
 @Entity()
 export default class Driver {
@@ -7,7 +13,8 @@ export default class Driver {
   id!: DriverId;
 
   @OneToOne(() => User)
-  user!: User;
+  @JoinColumn()
+  user!: User | UserId;
 
   @Column({ type: "text" })
   firstName!: string;

@@ -1,9 +1,12 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  OneToOne,
 } from "typeorm";
+import Customer from "./Customer";
+import Driver from "./Driver";
 
 @Entity()
 export default class User {
@@ -24,6 +27,12 @@ export default class User {
 
   @Column({ type: "boolean" })
   registered!: boolean;
+
+  @OneToOne(() => Customer)
+  customer?: Customer;
+
+  @OneToOne(() => Driver)
+  driver?: Driver;
 
   @CreateDateColumn()
   readonly createdAt!: Date;
